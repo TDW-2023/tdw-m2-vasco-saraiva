@@ -3,8 +3,9 @@ import deleteTask from "@/util/DeleteTask"
 import { useEffect, useState } from "react"
 import { useRef } from "react"
 import editTask from "@/util/EditTask"
+import { TasksState } from "@/types"
 
-const TodoList = ({ filter, task, tasks, setTasks }: TodoListProps) => {
+const TodoList = ({task, tasks, setTasks }: TodoListProps) => {
 
 
   const [isEditing, setIsEditing] = useState<Boolean>(false)
@@ -19,7 +20,7 @@ const TodoList = ({ filter, task, tasks, setTasks }: TodoListProps) => {
   }, [isEditing])
 
   function isCompletedChange(id: string) {
-    const updatedTasks = tasks.map(task => {
+    const updatedTasks : TasksState[] = tasks.map(task => {
       if (task.id === id) {
         return {
           ...task,
@@ -57,7 +58,7 @@ const TodoList = ({ filter, task, tasks, setTasks }: TodoListProps) => {
             </button>
 
             <button onClick={() => deleteTask(tasks, setTasks, task.id)}
-              className="bg-red-600 hover:bg-red-800 transition-colors duration-200 w-full text-white py-2 rounded-md">
+              className="bg-red-600 border-2 border-red-600 hover:border-red-800 hover:bg-red-800 transition-colors duration-200 w-full text-white py-2 rounded-md">
               Delete
             </button>
           </div>

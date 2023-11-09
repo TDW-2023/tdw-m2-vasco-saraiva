@@ -1,53 +1,50 @@
 'use client'
 
 import TodoForm from "@/components/TodoForm"
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 import { TasksState } from "@/types"
 import TodoFilter from "@/components/TodoFilter"
 import TodoList from "@/components/TodoList"
-import generateId from "@/util/GenerateID"
-
+import SearchBar from "@/components/SearchBar"
 
 export default function Home() {
 
-  const [tasks, setTasks] = useState<TasksState[]>([{
-    id: generateId(),
-    name: 'Eat',
-    isCompleted: false,
-  }])
+  let storedTasks = getLocalStorage('tasks')
 
-  const [filter, setFilter] = useState<String>('All')
+  // Complete task list
+  const [tasks, setTasks] = useState<TasksState[]>(
+    storedTasks ?
+      storedTasks :
+      []
+  )
+
+  // Task list according to selected filter
   const [filteredTasks, setFilteredTasks] = useState<TasksState[]>(tasks)
 
-  useEffect(() => {
-    switch (filter) {
-      case 'Active':
-        setFilteredTasks(tasks.filter(task => task.isCompleted === false))
-        break;
-      case 'Completed':
-        setFilteredTasks(tasks.filter(task => task.isCompleted === true))
-        break;
-      default:
-        setFilteredTasks(tasks)
-        break;
-    }
-    
-    console.log(filteredTasks)
+  // Task list according to selected filter and searched tasks
+  const [searchedTasks, setSearchedTasks] = useState<TasksState[]>(filteredTasks)
 
-  }, [filter, tasks])
+  useEffect(() => {
+    setLocalStorage('tasks', tasks)
+  }, [tasks])
 
   return (
-    <main className="flex justify-center items-center h-screen">
-      <section className="bg-white py-8 px-12 flex flex-col items-center justify-center rounded-md">
+    <main className="flex justify-center items-start pt-20 h-screen">
+      <section className="bg-white py-8 px-12 flex flex-col items-center justify-center rounded-md shadow-md">
         <h1 className="text-lg">What needs to be done?</h1>
         <TodoForm tasks={tasks} setTasks={setTasks} />
-        <TodoFilter setFilter={setFilter} />
+        <SearchBar filteredTasks={filteredTasks} setSearchedTasks={setSearchedTasks} />
+        <TodoFilter tasks={tasks} setFilteredTasks={setFilteredTasks} />
 
         <div className="flex flex-col justify-start w-full mt-6">
-          <p className="font-bold text-lg">{filteredTasks.length} {filteredTasks.length === 1 ? 'task' : 'tasks'} remaining</p>
+          {searchedTasks.length > 0 ?
+            <p className="font-bold text-lg">{searchedTasks.length} {searchedTasks.length === 1 ? 'task' : 'tasks'} remaining</p>
+            :
+            <p className="font-bold text-lg">You don't have any tasks</p>
+          }
 
-          {filteredTasks.map(task =>
-              <TodoList filter={filter} task={task} tasks={tasks} setTasks={setTasks} />
+          {searchedTasks.map(task =>
+            <TodoList key={task.id} task={task} tasks={tasks} setTasks={setTasks} />
           )}
 
         </div>
@@ -56,4 +53,17 @@ export default function Home() {
       </section>
     </main>
   )
+}
+
+
+function getLocalStorage(key: string) {
+  const data = window.localStorage.getItem(key)
+
+  return JSON.parse(data!)
+}
+
+function setLocalStorage(key: string, value: TasksState[]) {
+  const data = JSON.stringify(value)
+
+  return window.localStorage.setItem(key, data)
 }

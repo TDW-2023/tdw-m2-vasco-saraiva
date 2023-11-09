@@ -6,19 +6,23 @@ export interface TasksState {
   isCompleted: boolean
 }
 
-
 export interface TodoFormProps {
   tasks: TasksState[]
   setTasks: Dispatch<SetStateAction<TasksState[]>>
 }
 
 export interface TodoListProps {
-  filter: String
   task: TasksState
   tasks: TasksState[]
   setTasks: Dispatch<SetStateAction<TasksState[]>>
 }
 
 export interface TodoFilterProps {
-  setFilter: Dispatch<SetStateAction<String>>
+  tasks: TasksState[]
+  setFilteredTasks: Dispatch<SetStateAction<TasksState[]>>
+}
+
+export interface SearchBarProps {
+  filteredTasks: TasksState[]
+  setSearchedTasks: Dispatch<SetStateAction<TasksState[]>>
 }
