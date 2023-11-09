@@ -15,7 +15,6 @@ const SearchBar = ({filteredTasks, setSearchedTasks} : SearchBarProps) => {
         const regex = new RegExp(value, 'i');
 
         const searchedTasks = filteredTasks.filter(task => regex.test(task.name))
-        console.log(searchedTasks)
         setSearchedTasks(searchedTasks)
     }
 
