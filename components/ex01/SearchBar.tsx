@@ -1,4 +1,4 @@
-import { SearchBarProps } from '@/types';
+import { SearchBarProps } from '@/types/ex01';
 import React from 'react'
 import { useRef, useEffect } from "react"
 

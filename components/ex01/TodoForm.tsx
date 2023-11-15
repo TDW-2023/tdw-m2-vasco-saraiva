@@ -1,6 +1,6 @@
-import { TodoFormProps } from "@/types"
+import { TodoFormProps } from "@/types/ex01"
 import { useRef } from "react"
-import addTask from "@/util/AddTask"
+import addTask from "@/util/ex01/AddTask"
 
 
 const TodoForm = ({ tasks, setTasks }: TodoFormProps) => {

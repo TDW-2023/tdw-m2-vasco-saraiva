@@ -1,6 +1,6 @@
 import { Dispatch, RefObject, SetStateAction } from "react";
 import generateId from "./GenerateID";
-import { TasksState } from "@/types";
+import { TasksState } from "@/types/ex01";
 
 export default function addTask(
     tasks: TasksState[],

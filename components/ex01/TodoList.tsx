@@ -1,9 +1,9 @@
-import { TodoFormProps, TodoListProps } from "@/types"
-import deleteTask from "@/util/DeleteTask"
+import { TodoFormProps, TodoListProps } from "@/types/ex01"
+import deleteTask from "@/util/ex01/DeleteTask"
 import { useEffect, useState } from "react"
 import { useRef } from "react"
-import editTask from "@/util/EditTask"
-import { TasksState } from "@/types"
+import editTask from "@/util/ex01/EditTask"
+import { TasksState } from "@/types/ex01"
 
 const TodoList = ({task, tasks, setTasks }: TodoListProps) => {
 

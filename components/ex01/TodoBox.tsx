@@ -1,13 +1,13 @@
 'use client'
 
-import TodoForm from "@/components/TodoForm"
+import TodoForm from "@/components/ex01/TodoForm"
 import { useState, useEffect } from "react"
-import TodoFilter from "@/components/TodoFilter"
-import TodoList from "@/components/TodoList"
-import SearchBar from "@/components/SearchBar"
-import { TasksState } from "@/types"
+import TodoFilter from "@/components/ex01/TodoFilter"
+import TodoList from "@/components/ex01/TodoList"
+import SearchBar from "@/components/ex01/SearchBar"
+import { TasksState } from "@/types/ex01"
 
-const TodoBox = () => {
+const TodoBoxContext = () => {
 
     // Complete task list
     const [tasks, setTasks] = useState<TasksState[]>(
@@ -49,7 +49,7 @@ const TodoBox = () => {
     )
 }
 
-export default TodoBox
+export default TodoBoxContext
 
 
 function getLocalStorage(key: string) {

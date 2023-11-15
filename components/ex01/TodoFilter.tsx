@@ -1,6 +1,6 @@
-import { TodoFilterProps } from "@/types"
+import { TodoFilterProps } from "@/types/ex01"
 import {useEffect, useState} from 'react'
-import { TasksState } from "@/types"
+import { TasksState } from "@/types/ex01"
 
 
 
